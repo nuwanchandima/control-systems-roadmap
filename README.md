@@ -8,7 +8,7 @@ This roadmap consists of **7 phases** and **21 hands-on projects**. It is struct
 
 This roadmap is provided as a self-contained, interactive web page https://nuwanchandima.github.io/control-systems-roadmap/. To get the most out of it:
 
-1. **Open `index.html` in any web browser.** You do not need a local server; just double-click the file to view it.
+1. **Open https://nuwanchandima.github.io/control-systems-roadmap/ in any web browser.**
 2. **Navigate through the Phases:** Use the sidebar (or mobile navigation menu) to jump between the 7 distinct phases of the roadmap.
 3. **Track Your Progress:** At the bottom of each phase, you will find a **"PHASE CHECKLIST"**. Check off these items as you master the concepts. Your progress is automatically calculated and saved to your browser's local storage cache, so it will persist even if you close the tab or refresh the page.
 4. **Dark/Light Mode:** You can toggle between comfortable dark and light themes using the ☀️/🌙 icon in the top left corner of the sidebar (or in the mobile navigation). Your preference is saved locally.
