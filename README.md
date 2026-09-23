@@ -6,7 +6,7 @@ This roadmap consists of **7 phases** and **21 hands-on projects**. It is struct
 
 ## How to Read & Use This Roadmap
 
-This roadmap is provided as a self-contained, interactive web page (`index.html`). To get the most out of it:
+This roadmap is provided as a self-contained, interactive web page https://nuwanchandima.github.io/control-systems-roadmap/. To get the most out of it:
 
 1. **Open `index.html` in any web browser.** You do not need a local server; just double-click the file to view it.
 2. **Navigate through the Phases:** Use the sidebar (or mobile navigation menu) to jump between the 7 distinct phases of the roadmap.
