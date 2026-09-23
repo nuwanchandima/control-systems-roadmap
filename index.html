@@ -1,0 +1,2157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Systems Mastery Roadmap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Soft Dark Theme (Default) */
+      --bg: #121826;
+      --bg1: #182031;
+      --bg2: #1E293B;
+      --bg3: #273549;
+      --border: #334155;
+      --border2: #475569;
+      --cyan: #38BDF8;
+      --cyan2: #0EA5E9;
+      --cyan-dim: rgba(56, 189, 248, 0.1);
+      --cyan-glow: rgba(56, 189, 248, 0.2);
+      --amber: #FBBF24;
+      --green: #34D399;
+      --pink: #F472B6;
+      --purple: #A78BFA;
+      --text: #F8FAFC;
+      --text2: #94A3B8;
+      --text3: #64748B;
+      --mono: 'JetBrains Mono', monospace;
+      --sans: 'Inter', system-ui, sans-serif;
+      --radius: 6px;
+      --radius2: 10px;
+    }
+
+    :root[data-theme="light"] {
+      --bg: #F8FAFC;
+      --bg1: #FFFFFF;
+      --bg2: #F1F5F9;
+      --bg3: #E2E8F0;
+      --border: #E2E8F0;
+      --border2: #CBD5E1;
+      --cyan: #0284C7;
+      --cyan2: #0369A1;
+      --cyan-dim: rgba(2, 132, 199, 0.1);
+      --cyan-glow: rgba(2, 132, 199, 0.15);
+      --amber: #D97706;
+      --green: #059669;
+      --pink: #DB2777;
+      --purple: #7C3AED;
+      --text: #0F172A;
+      --text2: #475569;
+      --text3: #64748B;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    /* ─── Layout ─────────────────────────────── */
+    .shell {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--bg1);
+      border-right: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main {
+      flex: 1;
+      min-width: 0;
+      padding: 0;
+    }
+
+    /* ─── Sidebar ─────────────────────────────── */
+    .sb-header {
+      padding: 24px 20px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sb-logo {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .sb-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .sb-sub {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    .progress-wrap {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .progress-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .progress-label span {
+      color: var(--cyan);
+    }
+
+    .progress-track {
+      height: 3px;
+      background: var(--bg3);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan2), var(--cyan));
+      border-radius: 99px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    .sb-nav {
+      padding: 12px 0;
+      flex: 1;
+    }
+
+    .sb-phase-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      padding: 9px 20px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.15s;
+      border-left: 2px solid transparent;
+    }
+
+    .sb-phase-btn:hover {
+      background: var(--bg2);
+    }
+
+    .sb-phase-btn.active {
+      background: var(--cyan-dim);
+      border-left-color: var(--cyan);
+    }
+
+    .sb-phase-num {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text3);
+      min-width: 20px;
+      font-weight: 500;
+    }
+
+    .sb-phase-btn.active .sb-phase-num {
+      color: var(--cyan);
+    }
+
+    .sb-phase-name {
+      font-size: 12px;
+      color: var(--text2);
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    .sb-phase-btn.active .sb-phase-name {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .sb-phase-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--border2);
+      flex-shrink: 0;
+      margin-left: auto;
+      transition: background 0.15s;
+    }
+
+    .sb-phase-btn.active .sb-phase-dot {
+      background: var(--cyan);
+    }
+
+    .sb-phase-btn.done .sb-phase-dot {
+      background: var(--green);
+    }
+
+    .sb-phase-btn.done .sb-phase-num {
+      color: var(--green);
+    }
+
+    .sb-footer {
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sb-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .sb-stat {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    .sb-stat-n {
+      font-family: var(--mono);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--cyan);
+      line-height: 1;
+      margin-bottom: 3px;
+    }
+
+    .sb-stat-l {
+      font-size: 10px;
+      color: var(--text3);
+    }
+
+    /* ─── Main panel ─────────────────────────── */
+    .main-header {
+      background: var(--bg1);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 40px 24px;
+    }
+
+    .phase-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--cyan);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .phase-heading {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .phase-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 500;
+      font-family: var(--mono);
+    }
+
+    .pill-duration {
+      background: rgba(61, 214, 140, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(61, 214, 140, 0.25);
+    }
+
+    .pill-prereq {
+      background: rgba(155, 143, 255, 0.1);
+      color: var(--purple);
+      border: 1px solid rgba(155, 143, 255, 0.25);
+    }
+
+    .pill-hw {
+      background: rgba(245, 166, 35, 0.1);
+      color: var(--amber);
+      border: 1px solid rgba(245, 166, 35, 0.25);
+    }
+
+    .pill-cost {
+      background: rgba(0, 212, 255, 0.08);
+      color: var(--cyan2);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .phase-desc {
+      font-size: 13px;
+      color: var(--text2);
+      max-width: 680px;
+      line-height: 1.65;
+      margin-top: 10px;
+    }
+
+    /* ─── Content area ───────────────────────── */
+    .content-area {
+      padding: 32px 40px;
+    }
+
+    /* ─── Sections ───────────────────────────── */
+    .section-block {
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── Topics grid ────────────────────────── */
+    .topics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .topic-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      padding: 16px;
+      position: relative;
+      border-top: 2px solid var(--border);
+      transition: border-top-color 0.15s;
+    }
+
+    .topic-card:hover {
+      border-top-color: var(--cyan2);
+    }
+
+    .topic-icon {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .topic-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .topic-desc {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .topic-items {
+      margin-top: 10px;
+      list-style: none;
+    }
+
+    .topic-items li {
+      font-size: 11px;
+      color: var(--text2);
+      padding: 2px 0 2px 12px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .topic-items li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--text3);
+      font-size: 9px;
+      top: 4px;
+    }
+
+    .topic-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 10px;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 99px;
+      border: 1px solid;
+    }
+
+    .tag-math {
+      color: var(--purple);
+      border-color: rgba(155, 143, 255, 0.3);
+      background: rgba(155, 143, 255, 0.07);
+    }
+
+    .tag-code {
+      color: var(--cyan2);
+      border-color: rgba(0, 212, 255, 0.2);
+      background: rgba(0, 212, 255, 0.06);
+    }
+
+    .tag-hw {
+      color: var(--amber);
+      border-color: rgba(245, 166, 35, 0.3);
+      background: rgba(245, 166, 35, 0.07);
+    }
+
+    .tag-tools {
+      color: var(--green);
+      border-color: rgba(61, 214, 140, 0.3);
+      background: rgba(61, 214, 140, 0.07);
+    }
+
+    /* ─── Project cards ──────────────────────── */
+    .project-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius2);
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 20px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.15s;
+    }
+
+    .project-header:hover {
+      background: var(--bg3);
+    }
+
+    .proj-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--cyan2);
+      background: var(--cyan-dim);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      border-radius: var(--radius);
+      padding: 3px 8px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .proj-head-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .proj-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    .proj-tagline {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+
+    .proj-badges {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      flex-shrink: 0;
+      flex-wrap: wrap;
+    }
+
+    .proj-badge {
+      font-size: 10px;
+      font-family: var(--mono);
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-weight: 500;
+    }
+
+    .badge-hw {
+      background: rgba(245, 166, 35, 0.12);
+      color: var(--amber);
+      border: 1px solid rgba(245, 166, 35, 0.3);
+    }
+
+    .badge-sw {
+      background: rgba(0, 212, 255, 0.08);
+      color: var(--cyan2);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+    }
+
+    .badge-free {
+      background: rgba(61, 214, 140, 0.1);
+      color: var(--green);
+      border: 1px solid rgba(61, 214, 140, 0.25);
+    }
+
+    .badge-cost {
+      background: rgba(245, 166, 35, 0.1);
+      color: var(--amber);
+      border: 1px solid rgba(245, 166, 35, 0.25);
+    }
+
+    .proj-chevron {
+      color: var(--text3);
+      font-size: 14px;
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .project-card.open .proj-chevron {
+      transform: rotate(180deg);
+    }
+
+    .project-body {
+      display: none;
+      padding: 0 20px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .project-card.open .project-body {
+      display: block;
+    }
+
+    .body-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .body-section {}
+
+    .body-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .body-text {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .parts-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .part-chip {
+      font-size: 11px;
+      background: var(--bg3);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      padding: 3px 9px;
+      border-radius: 99px;
+    }
+
+    .steps-list {
+      list-style: none;
+      counter-reset: step;
+    }
+
+    .steps-list li {
+      counter-increment: step;
+      display: flex;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.5;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .steps-list li:last-child {
+      border-bottom: none;
+    }
+
+    .steps-list li::before {
+      content: counter(step, decimal-leading-zero);
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--cyan2);
+      font-weight: 500;
+      padding-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .proj-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      border: none;
+      transition: all 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--cyan-glow);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 212, 255, 0.3);
+    }
+
+    .btn-primary:hover {
+      background: rgba(0, 212, 255, 0.2);
+    }
+
+    .btn-secondary {
+      background: var(--bg3);
+      color: var(--text2);
+      border: 1px solid var(--border2);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg2);
+      color: var(--text);
+    }
+
+    /* ─── Phase connections ──────────────────── */
+    .connection-note {
+      background: rgba(155, 143, 255, 0.07);
+      border: 1px solid rgba(155, 143, 255, 0.2);
+      border-left: 3px solid var(--purple);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .connection-note strong {
+      color: var(--purple);
+      font-weight: 500;
+    }
+
+    .robotics-note {
+      background: rgba(0, 212, 255, 0.05);
+      border: 1px solid rgba(0, 212, 255, 0.15);
+      border-left: 3px solid var(--cyan2);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+    }
+
+    .robotics-note strong {
+      color: var(--cyan2);
+      font-weight: 500;
+    }
+
+    /* ─── Checklist ──────────────────────────── */
+    .checklist {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+
+    .check-box {
+      width: 16px;
+      height: 16px;
+      border: 1.5px solid var(--border2);
+      border-radius: 3px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: var(--green);
+    }
+
+    .check-box.checked {
+      background: rgba(61, 214, 140, 0.15);
+      border-color: var(--green);
+    }
+
+    .check-item.checked-item .check-text {
+      text-decoration: line-through;
+      color: var(--text3);
+    }
+
+    /* ─── Resources ──────────────────────────── */
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px;
+    }
+
+    .resource-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px 14px;
+    }
+
+    .res-type {
+      font-family: var(--mono);
+      font-size: 9px;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      margin-bottom: 5px;
+    }
+
+    .res-name {
+      font-size: 12px;
+      color: var(--text);
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .res-note {
+      font-size: 11px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+
+    /* ─── Milestone badge ────────────────────── */
+    .milestone-bar {
+      background: rgba(61, 214, 140, 0.06);
+      border: 1px solid rgba(61, 214, 140, 0.2);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .ms-icon {
+      font-size: 20px;
+    }
+
+    .ms-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 2px;
+    }
+
+    .ms-desc {
+      font-size: 11px;
+      color: var(--text2);
+      line-height: 1.4;
+    }
+
+    /* ─── Mobile ─────────────────────────────── */
+    .mobile-nav {
+      display: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg1);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      overflow-x: auto;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .mobile-nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 12px;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--text2);
+      font-size: 11px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.15s;
+    }
+
+    .mobile-nav-btn.active {
+      background: var(--cyan-dim);
+      border-color: rgba(0, 212, 255, 0.3);
+      color: var(--cyan);
+    }
+
+    @media (max-width: 800px) {
+      .sidebar {
+        display: none;
+      }
+
+      .mobile-nav {
+        display: flex;
+      }
+
+      .content-area {
+        padding: 20px;
+      }
+
+      .main-header {
+        padding: 20px;
+      }
+
+      .phase-heading {
+        font-size: 18px;
+      }
+
+      .body-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .proj-badges {
+        display: none;
+      }
+    }
+
+    /* ─── Scrollbar ──────────────────────────── */
+    ::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg1);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 99px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="shell">
+
+    <!-- ─── SIDEBAR ────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sb-header">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <div class="sb-logo">CTRL.SYS // ROADMAP</div>
+          <button id="theme-toggle-btn" onclick="toggleTheme()"
+            style="background:none; border:none; color:var(--text2); cursor:pointer; font-size:14px; padding:0; display:flex; align-items:center; justify-content:center;">🌙</button>
+        </div>
+        <div class="sb-title">Control Systems Mastery</div>
+        <div class="sb-sub">7 phases · 21 projects · ~20 months</div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="prog-label">PHASE PROGRESS</span>
+          <span id="prog-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="prog-bar"></div>
+        </div>
+      </div>
+
+      <nav class="sb-nav">
+        <button class="sb-phase-btn active" onclick="switchPhase(0)" id="nav-0">
+          <span class="sb-phase-num">P1</span>
+          <span class="sb-phase-name">Math Foundations</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(1)" id="nav-1">
+          <span class="sb-phase-num">P2</span>
+          <span class="sb-phase-name">Classical Control</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(2)" id="nav-2">
+          <span class="sb-phase-num">P3</span>
+          <span class="sb-phase-name">Modern Control</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(3)" id="nav-3">
+          <span class="sb-phase-num">P4</span>
+          <span class="sb-phase-name">Digital Control &amp; Filters</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(4)" id="nav-4">
+          <span class="sb-phase-num">P5</span>
+          <span class="sb-phase-name">Nonlinear &amp; MPC</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(5)" id="nav-5">
+          <span class="sb-phase-num">P6</span>
+          <span class="sb-phase-name">ML for Control</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+        <button class="sb-phase-btn" onclick="switchPhase(6)" id="nav-6">
+          <span class="sb-phase-num">P7</span>
+          <span class="sb-phase-name">Intelligent &amp; RL Control</span>
+          <span class="sb-phase-dot"></span>
+        </button>
+      </nav>
+
+      <div class="sb-footer">
+        <div class="sb-stats">
+          <div class="sb-stat">
+            <div class="sb-stat-n">7</div>
+            <div class="sb-stat-l">Phases</div>
+          </div>
+          <div class="sb-stat">
+            <div class="sb-stat-n">21</div>
+            <div class="sb-stat-l">Projects</div>
+          </div>
+          <div class="sb-stat">
+            <div class="sb-stat-n">~$25</div>
+            <div class="sb-stat-l">HW Cost</div>
+          </div>
+          <div class="sb-stat">
+            <div class="sb-stat-n">20mo</div>
+            <div class="sb-stat-l">Timeline</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ─── MOBILE NAV ────────────────────────── -->
+    <div class="mobile-nav" id="mobile-nav">
+      <button onclick="toggleTheme()" id="theme-toggle-mobile"
+        style="background:none; border:none; color:var(--text2); cursor:pointer; font-size:14px; padding:0 10px;">🌙</button>
+      <button class="mobile-nav-btn active" onclick="switchPhase(0)">P1 Math</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(1)">P2 Classical</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(2)">P3 Modern</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(3)">P4 Digital</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(4)">P5 Nonlinear</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(5)">P6 ML</button>
+      <button class="mobile-nav-btn" onclick="switchPhase(6)">P7 RL</button>
+    </div>
+
+    <!-- ─── MAIN ────────────────────────────────── -->
+    <main class="main" id="main-content">
+      <!-- Phases injected by JS -->
+    </main>
+
+  </div><!-- end .shell -->
+
+  <script>
+    const phases = [
+      /* ══════════════════════════════════════════════════════
+         PHASE 1 — MATHEMATICAL FOUNDATIONS
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P1",
+        title: "Mathematical Foundations",
+        duration: "6–8 weeks",
+        prereq: "Calculus + Linear Algebra basics",
+        hw: "None",
+        cost: "Free (laptop only)",
+        color: "#9B8FFF",
+        desc: "Every control equation — from a PID to an RL policy — is written in the language of this phase. Do not skip or rush here. A shaky math foundation will cause confusion in every phase after it.",
+        connection: null,
+        robNote: null,
+        topics: [
+          {
+            icon: "📊",
+            title: "Signals & Systems",
+            desc: "Laplace & Fourier transforms, convolution, transfer functions",
+            items: ["Laplace transform and inverse Laplace", "Transfer functions H(s) and poles/zeros", "Fourier transform and frequency representation", "Convolution and impulse response", "Bode plots: magnitude and phase", "Nyquist plot basics"],
+            tags: ["math", "tools:scipy.signal, sympy"]
+          },
+          {
+            icon: "🔢",
+            title: "Linear Algebra for Control",
+            desc: "Matrix operations, eigenvalues, and state-space structure",
+            items: ["Matrix multiplication, rank, null space", "Eigenvalues and eigenvectors", "Matrix exponentials e^At", "SVD and least squares", "Controllability and observability matrices"],
+            tags: ["math", "tools:NumPy, SciPy"]
+          },
+          {
+            icon: "📐",
+            title: "Differential Equations",
+            desc: "ODEs, phase portraits, numerical solvers for dynamic systems",
+            items: ["First and second order ODEs", "Phase plane analysis", "Euler method and Runge-Kutta 4", "Equilibrium points and stability", "Lyapunov stability basics"],
+            tags: ["math", "code", "tools:scipy.integrate.solve_ivp"]
+          }
+        ],
+        checks: [
+          "Understand Laplace transform pairs by heart",
+          "Can draw a Bode plot from H(s) by hand",
+          "Can compute eigenvalues of a 3×3 matrix",
+          "Understand what poles tell you about stability",
+          "Can numerically solve an ODE in Python",
+          "Understand convolution and impulse response"
+        ],
+        resources: [
+          { type: "BOOK", name: "Signals and Systems — Oppenheim", note: "Chapters 1–4 minimum" },
+          { type: "BOOK", name: "Linear Algebra — Gilbert Strang", note: "MIT OCW version, free" },
+          { type: "COURSE", name: "MIT 6.003 Signals & Systems", note: "Free on MIT OpenCourseWare" },
+          { type: "TOOL", name: "Python + NumPy + SciPy", note: "All you need for every project" }
+        ],
+        milestone: {
+          icon: "🔭",
+          title: "Phase 1 milestone",
+          desc: "You can look at a second-order transfer function and immediately say: is it stable? What is its natural frequency? What does its step response look like? You can answer these without running code."
+        },
+        projects: [
+          {
+            num: "01",
+            name: "Live signal dissector",
+            tagline: "Record any sound — see it break apart into frequencies in real time",
+            hw: false,
+            cost: "Free",
+            what: "Build a Python app that reads your laptop microphone in real time. Display the raw waveform on the left panel. On the right panel, compute and display the live Fourier spectrum showing which frequencies are present. Add a slider for a low-pass filter cutoff — apply it to the signal and play back the filtered audio so you can hear the difference.",
+            why: "Every control signal — motor noise, vibration, sensor readings — is understood through frequency. This makes the Fourier transform physical and audible before any exam question.",
+            parts: ["Laptop only", "Python", "numpy", "pyaudio", "matplotlib"],
+            steps: [
+              "Capture live mic audio in 0.5s chunks using pyaudio",
+              "Plot raw waveform with time on x-axis",
+              "Apply numpy.fft.rfft() and plot frequency magnitude",
+              "Add a slider: choose low-pass cutoff frequency",
+              "Apply filter, convert back, play filtered audio through speakers"
+            ],
+            q1: "Help me build a real-time Fourier spectrum display from laptop microphone in Python using pyaudio and numpy",
+            q2: "How do I apply a low-pass filter to audio in the frequency domain using numpy FFT and play it back?"
+          },
+          {
+            num: "02",
+            name: "Falling object solver race",
+            tagline: "Three numerical solvers race on the same physics — see who drifts first",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a ball falling under gravity with air drag. Implement three solvers side by side: Euler, Euler-Cromer, and RK4. Plot all three trajectories against the exact analytical solution on the same graph. Add a slider for step size — reduce it and watch Euler diverge while RK4 stays tight. Include an error plot below showing cumulative deviation for each solver.",
+            why: "Real embedded controllers run at a fixed sample rate using discrete integration. Seeing Euler blow up at large step sizes builds intuition for why solver choice matters in microcontroller code.",
+            parts: ["Laptop only", "Python", "numpy", "matplotlib", "tkinter"],
+            steps: [
+              "Write equations of motion: a = g - (k/m)v²",
+              "Implement Euler: v[i+1] = v[i] + a×dt, y[i+1] = y[i] + v[i]×dt",
+              "Implement Euler-Cromer: update position with new velocity",
+              "Implement RK4: four slope estimates, weighted average",
+              "Plot all four on one chart; add step-size slider and error subplot"
+            ],
+            q1: "Help me build a falling ball simulator comparing Euler, Euler-Cromer, and RK4 integration with analytical solution in Python",
+            q2: "How do I visualize accumulated integration error for different numerical ODE solvers with matplotlib?"
+          },
+          {
+            num: "03",
+            name: "Eigenvalue stability explorer",
+            tagline: "Type a matrix — watch the system's future appear as phase arrows",
+            hw: false,
+            cost: "Free",
+            what: "Build an interactive Python tool. User enters a 2×2 system matrix A. The app instantly shows: eigenvalues plotted on the complex plane with stable/unstable color coding, and a phase portrait with arrows showing how trajectories move. Add preset buttons: 'stable focus', 'unstable spiral', 'saddle point', 'center (oscillation)'. Include a text box explaining what the current eigenvalues mean in plain English.",
+            why: "The complex plane is where controller designers live. Every tuning decision — PID gains, LQR weights, pole placement — moves eigenvalues on this plane. Building this tool makes that invisible space tangible.",
+            parts: ["Laptop only", "Python", "numpy", "matplotlib"],
+            steps: [
+              "Build a tkinter form with 4 input fields (2×2 matrix entries)",
+              "Compute eigenvalues using numpy.linalg.eig(A)",
+              "Plot eigenvalues on complex plane: red dot if Re>0, green if Re<0",
+              "Draw phase portrait using meshgrid + quiver for arrow field",
+              "Add 4 preset buttons that fill the matrix and auto-update"
+            ],
+            q1: "Help me build an eigenvalue stability visualizer with complex plane plot and phase portrait in Python using matplotlib",
+            q2: "How do I draw a phase portrait for a 2x2 linear system using matplotlib quiver and meshgrid?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 2 — CLASSICAL CONTROL
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P2",
+        title: "Classical Control Systems",
+        duration: "8–10 weeks",
+        prereq: "Phase 1 complete",
+        hw: "1 project (Arduino + fan, ~$10)",
+        cost: "~$10 hardware",
+        color: "#00D4FF",
+        desc: "The foundation of 90% of real industrial controllers. PID runs your car's cruise control, the temperature in your oven, and the altitude of aircraft. Learn it deeply, not just the formula — understand why anti-windup exists and what lead compensation physically does.",
+        connection: null,
+        robNote: null,
+        topics: [
+          {
+            icon: "⚙️",
+            title: "PID Control",
+            desc: "The most used controller on Earth — design, tune, and implement by hand",
+            items: ["P, I, D terms and their physical meaning", "Ziegler-Nichols tuning method", "Anti-windup for integrator saturation", "Derivative kick prevention (filter on D term)", "Cascade PID (inner loop / outer loop)"],
+            tags: ["math", "code", "hw", "tools:Arduino C, scipy.signal"]
+          },
+          {
+            icon: "📈",
+            title: "Frequency Domain Design",
+            desc: "Root locus, Bode plots, gain/phase margins, lead-lag compensators",
+            items: ["Root locus construction and interpretation", "Gain margin and phase margin definitions", "Lead compensator: improve speed and damping", "Lag compensator: improve steady-state accuracy", "Sensitivity and robustness trade-offs"],
+            tags: ["math", "tools:scipy.signal, python-control"]
+          },
+          {
+            icon: "🔬",
+            title: "System Identification",
+            desc: "Extract a math model from real sensor data — critical for any hardware project",
+            items: ["Step response identification (rise time, settling time)", "Chirp/frequency sweep for frequency-domain ID", "ARX and ARMAX model structures", "Least-squares fitting of parameters", "Residual analysis and validation"],
+            tags: ["math", "code", "tools:scipy, sippy"]
+          }
+        ],
+        checks: [
+          "Can tune a PID by Ziegler-Nichols from a step response",
+          "Understand why integral windup causes overshoot",
+          "Can read a Bode plot and identify gain/phase margins",
+          "Can design a lead compensator for a given spec",
+          "Can identify a first-order system from step response data",
+          "Understand root locus rules (at least 4 of them)"
+        ],
+        resources: [
+          { type: "BOOK", name: "Modern Control Engineering — Ogata", note: "Chapters 4–8, the standard textbook" },
+          { type: "TOOL", name: "python-control library", note: "'pip install control' — bode, rlocus, margin" },
+          { type: "COURSE", name: "Control Bootcamp — Steve Brunton (YouTube)", note: "Free, excellent visual explanations" },
+          { type: "TOOL", name: "Arduino IDE", note: "For the fan hardware project" }
+        ],
+        milestone: {
+          icon: "🎛️",
+          title: "Phase 2 milestone",
+          desc: "You have a spinning fan physically under your control. You tuned the PID yourself, broke it with windup, fixed it with anti-windup, and watched the step response on a serial plotter. You can design a lead compensator from a Bode plot without help."
+        },
+        projects: [
+          {
+            num: "04",
+            name: "Fan speed regulator",
+            tagline: "Write a PID from scratch — control a real spinning motor with your own code",
+            hw: true,
+            cost: "~$10",
+            what: "Wire a small 5V PC fan (with tachometer wire) to an Arduino. Write a PID controller entirely from scratch in Arduino C — no library. A potentiometer sets the target speed. The tachometer interrupt counts pulses to measure real RPM. Drive fan speed with PWM. Deliberately remove the integral term: observe the steady-state error. Add it back. Then saturate it deliberately to cause windup. Add anti-windup and fix it. Log everything to the serial plotter.",
+            why: "Writing the PID equation by hand (not importing a library) and watching anti-windup rescue a real motor makes the integral windup problem unforgettable. No simulation matches this.",
+            parts: ["Arduino Uno clone (~$5)", "5V PC fan with tach wire (~$2)", "10kΩ potentiometer (~$0.50)", "100Ω resistor", "Breadboard + jumper wires"],
+            steps: [
+              "Wire fan: red→5V, black→GND, yellow tach→pin 2 (interrupt), blue PWM←pin 3",
+              "Write RPM counter: attachInterrupt(0, countPulse, RISING), calculate RPM each 100ms",
+              "Write PID: error=setpoint-rpm, integral+=error*dt, derivative=(error-prev)/dt, output=Kp*e+Ki*i+Kd*d",
+              "Drive fan: analogWrite(3, constrain(output, 0, 255))",
+              "Add anti-windup: only integrate when output is not saturated (between 0 and 255)"
+            ],
+            q1: "Help me write a complete PID controller from scratch in Arduino C for fan speed control using tachometer feedback and PWM",
+            q2: "How do I implement conditional integration anti-windup in a manual PID on an Arduino microcontroller?"
+          },
+          {
+            num: "05",
+            name: "Transfer function playground",
+            tagline: "Enter any plant — instantly see Bode plot, step response, root locus, and margins",
+            hw: false,
+            cost: "Free",
+            what: "Build a Python GUI where a beginner enters any transfer function G(s) as numerator and denominator coefficients. The app draws four plots simultaneously: Bode diagram, Nyquist plot, root locus, and step response. Add a second row for a compensator C(s) — multiply with G(s) and all four plots update instantly. Display gain margin, phase margin, and closed-loop poles as text readouts. Include five preset plants to explore.",
+            why: "Frequency domain tools feel abstract without instant visual feedback. This app turns 20-minute hand calculations into a 2-second interaction — beginners learn by experimenting, not by grinding algebra.",
+            parts: ["Laptop only", "Python", "scipy.signal", "matplotlib", "tkinter"],
+            steps: [
+              "Build GUI: two rows of coefficient inputs (G numerator, G denominator, C numerator, C denominator)",
+              "On any change: compute GC = G×C using numpy.polymul for coefficients",
+              "Plot Bode: scipy.signal.bode(), with gain margin dashed line",
+              "Plot root locus: scipy.signal.root_locus() or manual computation",
+              "Display text: gain_margin, phase_margin = scipy.signal.margin(bode_data)"
+            ],
+            q1: "Help me build a Python GUI for transfer function analysis showing Bode plot, root locus, step response, and stability margins",
+            q2: "How do I compute gain margin and phase margin from a Bode plot using scipy.signal in Python?"
+          },
+          {
+            num: "06",
+            name: "Black-box system identifier",
+            tagline: "Send a chirp into an unknown system — recover its transfer function from the output",
+            hw: false,
+            cost: "Free",
+            what: "Create three 'mystery plants' (hidden transfer functions — the student cannot see them). Send a chirp signal sweeping 0.1 Hz to 100 Hz into each. Collect the output. Compute the frequency response estimate: H(f) = FFT(output) / FFT(input). Plot the estimated Bode plot against the hidden true Bode plot. Show the student their identification error in dB. Add a 'reveal' button that shows the true plant after they have submitted their estimate.",
+            why: "In real hardware you never know the system perfectly. This project forces the first question an engineer asks: 'what is this thing doing?' before trying to control it.",
+            parts: ["Laptop only", "Python", "numpy", "scipy.signal", "matplotlib"],
+            steps: [
+              "Generate chirp: scipy.signal.chirp(t, f0=0.1, f1=100, t1=T, method='logarithmic')",
+              "Create 3 hidden plants as scipy LTI objects (do not show the student)",
+              "Simulate plant: scipy.signal.lsim(plant, chirp, t)",
+              "Estimate: H_est = rfft(output) / rfft(input); compute magnitude and phase",
+              "Plot est vs true Bode; compute RMS error in dB; add reveal button"
+            ],
+            q1: "Help me build a system identification tool using chirp input and FFT frequency response estimation in Python",
+            q2: "How do I estimate a transfer function's Bode plot from input-output time-domain data using FFT division in Python?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 3 — MODERN CONTROL (STATE-SPACE)
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P3",
+        title: "Modern Control — State-Space",
+        duration: "8–10 weeks",
+        prereq: "Phases 1–2 complete",
+        hw: "None",
+        cost: "Free (laptop only)",
+        color: "#3DD68C",
+        desc: "State-space is the language of multi-variable systems — anything with more than one output you care about. Robotics, aircraft, power grids all live here. LQR is the critical bridge concept: it is mathematically identical to MPC with horizon=1, and its cost function is a simplified version of the RL value function.",
+        connection: "LQR is the ancestor of both MPC and reinforcement learning. The Riccati equation you solve here is the same equation MPC uses at each timestep, and the quadratic cost function J = ∫(x'Qx + u'Ru)dt is the continuous version of the RL discounted return. Mastering LQR here unlocks the intuition for Phases 5 and 7.",
+        robNote: null,
+        topics: [
+          {
+            icon: "🧱",
+            title: "State-Space Representation",
+            desc: "ẋ = Ax + Bu, y = Cx + Du — the full vector form of dynamics",
+            items: ["State equations ẋ = Ax + Bu, y = Cx + Du", "Converting from transfer function to state-space", "Controllability matrix [B, AB, A²B, ...]", "Observability matrix [C, CA, CA², ...]", "Modal decomposition and state transformation"],
+            tags: ["math", "tools:python-control, numpy"]
+          },
+          {
+            icon: "🎯",
+            title: "Optimal Control — LQR / LQG",
+            desc: "The mathematically optimal controller — minimize a cost function with the Riccati equation",
+            items: ["Cost function J = ∫(x'Qx + u'Ru)dt", "Algebraic Riccati equation (ARE)", "Q and R weight matrix interpretation", "LQG = LQR + Kalman estimator (observer)", "Separation principle for LQG"],
+            tags: ["math", "code", "tools:scipy.linalg.solve_continuous_are"]
+          },
+          {
+            icon: "👁️",
+            title: "State Observers",
+            desc: "Estimate states you cannot measure — the dual problem of control design",
+            items: ["Luenberger observer design", "Observer pole placement (3–5× faster than plant)", "Detectability condition", "Output feedback via observer + controller", "Duality: observer design mirrors controller design"],
+            tags: ["math", "code", "tools:python-control, scipy"]
+          }
+        ],
+        checks: [
+          "Can write A, B, C, D matrices for a physical system",
+          "Can check controllability with rank test",
+          "Can solve the Riccati equation in Python",
+          "Understand what Q and R weights physically mean",
+          "Can design a Luenberger observer with pole placement",
+          "Understand the separation principle (controller + observer independently)"
+        ],
+        resources: [
+          { type: "BOOK", name: "Modern Control Engineering — Ogata", note: "Chapters 9–12 for state-space" },
+          { type: "BOOK", name: "Feedback Control of Dynamic Systems — Franklin", note: "Best for LQR/LQG detail" },
+          { type: "TOOL", name: "python-control", note: "pip install control slycot — has lqr(), place()" },
+          { type: "VIDEO", name: "Data Driven Control — Steve Brunton (YouTube)", note: "Free playlist on modern control" }
+        ],
+        milestone: {
+          icon: "⚖️",
+          title: "Phase 3 milestone",
+          desc: "You have balanced a virtual inverted pendulum with an LQR controller you built by solving the Riccati equation. You moved the Q/R sliders and felt the trade-off between fast response and control effort. You have an observer estimating a state you cannot directly measure."
+        },
+        projects: [
+          {
+            num: "07",
+            name: "Drone attitude state-space model",
+            tagline: "Model a quadrotor's roll axis — check if you can control it, then do it",
+            hw: false,
+            cost: "Free",
+            what: "Model the roll axis of a quadrotor as a state-space system: states are roll angle (φ) and roll rate (φ̇), input is differential motor torque. Build the A and B matrices from physical equations. Check controllability rank. Use pole placement to design a full-state feedback controller K. Simulate closed-loop with initial tilt disturbances. Add a slider to move the closed-loop poles — watch stability appear and disappear as poles cross the imaginary axis.",
+            why: "Quadrotors are the most relatable unstable system. Using state-space makes it obvious that you need both angle and rate as states — a PID approach hides this by using D to approximate rate.",
+            parts: ["Laptop only", "Python", "numpy", "scipy", "matplotlib"],
+            steps: [
+              "A = [[0, 1], [0, 0]], B = [[0], [1/I]] for roll axis (I = moment of inertia)",
+              "Compute controllability matrix Mc = [B, A@B]; verify rank(Mc) = 2",
+              "Choose desired poles e.g. [-3+3j, -3-3j] for a stable damped response",
+              "Compute K using scipy.signal.place_poles(A, B, desired_poles).gain_matrix",
+              "Simulate: solve_ivp with ẋ = (A - B@K)x + disturbance; animate"
+            ],
+            q1: "Help me design a full-state feedback controller for quadrotor roll dynamics using pole placement in Python",
+            q2: "How do I check controllability of a state-space system and what does it mean physically if it is not controllable?"
+          },
+          {
+            num: "08",
+            name: "LQR cart-pole balancer",
+            tagline: "Balance an inverted pendulum — tune Q and R, feel the optimality trade-off",
+            hw: false,
+            cost: "Free",
+            what: "Implement the classic cart-pole (inverted pendulum on a cart) system. Linearize the nonlinear equations around the upright equilibrium. Build the 4-state linear model (cart position, cart velocity, pole angle, pole rate). Design an LQR controller by solving the Riccati equation. Animate the balancing behavior with matplotlib. Add two live sliders: Q weight (angle penalty) and R weight (effort penalty). Watch the controller become aggressive or lazy in real time.",
+            why: "The cart-pole is the 'hello world' of optimal control. The Q/R slider is the most important pedagogical tool in this entire roadmap — it makes abstract cost function weighting physically visible.",
+            parts: ["Laptop only", "Python", "numpy", "scipy", "matplotlib"],
+            steps: [
+              "Write nonlinear cart-pole ODEs; linearize using Jacobian around θ=0",
+              "Build 4×4 A matrix and 4×1 B matrix for the linearized system",
+              "Solve ARE: P = scipy.linalg.solve_continuous_are(A, B, Q, R)",
+              "Compute K = inv(R) @ B.T @ P; implement u = -K @ x",
+              "Animate cart and pole using matplotlib patches; add Q/R sliders with matplotlib.widgets"
+            ],
+            q1: "Help me implement a cart-pole LQR controller with animated matplotlib visualization and interactive Q/R weight sliders",
+            q2: "How do I linearize the cart-pole nonlinear equations and build the A, B matrices for LQR design?"
+          },
+          {
+            num: "09",
+            name: "DC motor velocity observer",
+            tagline: "Measure only position — estimate velocity with a Luenberger observer",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a DC motor where only shaft position (encoder ticks) is measured. Design a Luenberger observer that estimates both position and velocity from the position-only signal. Add realistic Gaussian noise to the position measurement. Compare three velocity estimates side by side: (1) raw finite-difference (very noisy), (2) moving average of differences (smoother but laggy), (3) Luenberger observer estimate (smooth and fast). Show all three on the same animated plot.",
+            why: "Real encoders give discrete position ticks — finite-difference velocity is noisy on cheap hardware. Observers give a smooth estimate without the lag of filtering. This directly applies to servo motor control and robot joint velocity estimation.",
+            parts: ["Laptop only", "Python", "numpy", "scipy", "matplotlib"],
+            steps: [
+              "Simulate DC motor: A=[[0,1],[0,-b/J]], B=[[0],[Kt/J]], C=[[1,0]] with position output",
+              "Add Gaussian noise to position: y_noisy = y + np.random.normal(0, noise_std)",
+              "Design observer: choose poles 4× faster than plant eigenvalues",
+              "Compute L using scipy.signal.place_poles(A.T, C.T, observer_poles).gain_matrix.T",
+              "Simulate observer: x_hat_dot = A@x_hat + B@u + L@(y_noisy - C@x_hat)"
+            ],
+            q1: "Help me design a Luenberger observer for a DC motor to estimate velocity from noisy position measurements in Python",
+            q2: "How do I choose observer gain poles relative to the plant poles and what happens if the observer is too slow or too fast?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 4 — DIGITAL CONTROL & FILTERS
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P4",
+        title: "Digital Control & Filters",
+        duration: "6–8 weeks",
+        prereq: "Phase 3 complete",
+        hw: "1 project (MPU-6050 + servo, ~$10)",
+        cost: "~$10 hardware",
+        color: "#F5A623",
+        desc: "Every real controller runs on a microcontroller at a discrete sample rate, not in continuous time. Discretization, sample rate selection, and digital filtering determine whether a theoretically good controller actually works in hardware. The Kalman filter in this phase is one of the most important algorithms in all of engineering.",
+        connection: null,
+        robNote: "The Kalman filter you build in this phase is exactly the same estimator used in your robot hand pipeline. An Extended Kalman Filter (EKF) handles the nonlinear MANO joint angle kinematics that MediaPipe estimates. The IMU fusion project directly maps to the RealSense + Kalman smoothing layer in your retargeting architecture.",
+        topics: [
+          {
+            icon: "💻",
+            title: "Digital Control Systems",
+            desc: "Z-transform, discretization methods, sample rate, digital PID",
+            items: ["Z-transform and inverse Z-transform", "Jury stability criterion for discrete systems", "Discretization: ZOH, Forward Euler, Backward Euler, Tustin", "Choosing sample rate: Shannon, rule of thumb 20×BW", "Digital PID implementation with fixed-point arithmetic"],
+            tags: ["math", "code", "hw", "tools:scipy.signal (discrete), Arduino"]
+          },
+          {
+            icon: "🔍",
+            title: "Kalman Filter",
+            desc: "Optimal linear estimator — fuse noisy sensors with a system model",
+            items: ["State prediction step: x̂ = Ax̂ + Bu", "Covariance prediction: P = APA' + Q", "Kalman gain: K = PH'(HPH' + R)⁻¹", "State update: x̂ = x̂ + K(z - Hx̂)", "Extended Kalman Filter (EKF) for nonlinear systems", "Unscented Kalman Filter (UKF) for heavy nonlinearity"],
+            tags: ["math", "code", "tools:numpy (from scratch), filterpy"]
+          },
+          {
+            icon: "📡",
+            title: "Other Important Filters",
+            desc: "Complementary, Mahony/Madgwick, particle filter — pick the right tool",
+            items: ["Complementary filter: fast, simple IMU fusion", "Mahony and Madgwick AHRS algorithms", "FIR and IIR digital filters (Butterworth, Chebyshev)", "Particle filter for non-Gaussian estimation", "Median filter for spike/outlier removal"],
+            tags: ["code", "hw", "tools:scipy.signal, imusensor library"]
+          }
+        ],
+        checks: [
+          "Can discretize a continuous controller using Tustin method",
+          "Understand why sample rate matters for stability",
+          "Can implement a Kalman filter from the equations (not a library)",
+          "Understand what Q and R mean in a Kalman filter",
+          "Know when to use complementary filter vs Kalman filter",
+          "Can implement a digital Butterworth low-pass filter in Python"
+        ],
+        resources: [
+          { type: "BOOK", name: "Computer-Controlled Systems — Åström & Wittenmark", note: "Definitive text on digital control" },
+          { type: "BOOK", name: "Optimal State Estimation — Dan Simon", note: "Best Kalman filter reference, practical" },
+          { type: "TOOL", name: "filterpy (Python)", note: "pip install filterpy — KalmanFilter class for comparison" },
+          { type: "VIDEO", name: "Michel van Biezen Kalman Filter Playlist", note: "YouTube, 55 short videos, very clear" }
+        ],
+        milestone: {
+          icon: "🎯",
+          title: "Phase 4 milestone",
+          desc: "A real MPU-6050 sensor is connected to your Arduino. The tilting platform holds a marble near center using a complementary filter for angle estimation and a digital PID for servo control. You have also implemented a Kalman filter from scratch in numpy — no library — and seen it outperform raw sensor differentiation."
+        },
+        projects: [
+          {
+            num: "10",
+            name: "Self-leveling platform",
+            tagline: "Keep a marble centered on a tilting board using IMU angle + servo PID",
+            hw: true,
+            cost: "~$10",
+            what: "Mount an MPU-6050 IMU on a servo-controlled tilting platform (a flat board on a single servo axis). Read raw accelerometer and gyroscope data over I2C. Implement a complementary filter to estimate the board tilt angle. Feed the angle estimate into a digital PID that drives the servo to keep the board level (marble near center). Log all data over serial. As an extension: swap the complementary filter for a Kalman filter and compare noise levels.",
+            why: "This combines I2C hardware, digital filtering, and embedded PID into one system a beginner can hold in their hands and tilt. The physical feeling of the marble rolling teaches closed-loop behavior better than any simulation.",
+            parts: ["Arduino Uno (~$5)", "MPU-6050 IMU (~$1)", "SG90 micro servo (~$1.50)", "Flat acrylic board (15cm × 15cm)", "Small marble", "Breadboard + wires"],
+            steps: [
+              "Wire MPU-6050: VCC→3.3V, GND, SDA→A4, SCL→A5 on Arduino Uno",
+              "Read ax, ay, az, gx from MPU6050 library at 100Hz",
+              "Complementary filter: angle = 0.98×(angle + gx×dt) + 0.02×atan2(ay, az)",
+              "PID loop: error = 0 - angle; output = Kp×e + Ki×∑e + Kd×Δe",
+              "Servo: servo.write(90 + constrain(output, -45, 45)); log over Serial"
+            ],
+            q1: "Help me build a self-leveling platform with MPU-6050 complementary filter and PID servo control on Arduino",
+            q2: "How do I tune the alpha coefficient in a complementary filter for an MPU-6050 and compare it to a Kalman filter?"
+          },
+          {
+            num: "11",
+            name: "Kalman filter from scratch",
+            tagline: "Track a bouncing ball — filter fake noisy GPS into a clean position estimate",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a ball bouncing in 2D under gravity with elastic collisions. Generate fake 'GPS' measurements by adding large Gaussian noise to the true position. Implement a full Kalman filter from scratch in numpy — write all six equations, no filterpy. Animate three things simultaneously: true trajectory (hidden), noisy measurements (scattered), and Kalman estimate (smooth). Add two sliders: process noise Q (how much you trust the model) and measurement noise R (how much you trust the sensor).",
+            why: "Implementing the predict-update cycle from the raw equations — not calling KalmanFilter() — is the only way to truly understand what each matrix does. The Q vs R slider is the single most important control knob in sensor fusion.",
+            parts: ["Laptop only", "Python", "numpy", "matplotlib"],
+            steps: [
+              "State vector x = [px, py, vx, vy]; simulate bouncing ball physics",
+              "Add noise: z = H@x_true + np.random.multivariate_normal([0,0], R)",
+              "Predict: x = A@x + B@u; P = A@P@A.T + Q",
+              "Update: K = P@H.T @ inv(H@P@H.T + R); x = x + K@(z - H@x); P = (I - K@H)@P",
+              "Animate: scatter for noisy z, line for true, line for Kalman x̂; add Q/R sliders"
+            ],
+            q1: "Help me implement a 2D Kalman filter from scratch in numpy for bouncing ball tracking with animated matplotlib visualization",
+            q2: "How do I tune the Q and R matrices in a Kalman filter and what happens when Q is too large or too small relative to R?"
+          },
+          {
+            num: "12",
+            name: "Discretization method comparison",
+            tagline: "The same PID, three different discrete forms — see who breaks first at low sample rate",
+            hw: false,
+            cost: "Free",
+            what: "Take one continuous-time PID controller designed for a known second-order plant. Discretize it using three methods: Forward Euler, Backward Euler, and Tustin (bilinear transform). Simulate all three digital controllers on the same plant at three sample rates: 100Hz (fast), 10Hz (moderate), 2Hz (slow). Plot the step responses side by side in a 3×3 grid. Measure settling time and overshoot for each combination and display in a summary table.",
+            why: "Every embedded controller runs at a fixed sample rate. Forward Euler can go unstable at rates that Tustin handles easily. This project makes that failure mode concrete — critical before deploying controllers on microcontrollers.",
+            parts: ["Laptop only", "Python", "numpy", "scipy.signal", "matplotlib"],
+            steps: [
+              "Design continuous PID for G(s) = 1/(s²+2s+1) using Ziegler-Nichols",
+              "Forward Euler: s → (z-1)/T; multiply out C(z) and implement as difference equation",
+              "Tustin: s → (2/T)×(z-1)/(z+1); compute C(z) coefficients",
+              "Simulate each at Ts = 0.01s, 0.1s, 0.5s using discrete LTI or manual loop",
+              "Plot 3×3 subplot grid; add table with settling time and overshoot per cell"
+            ],
+            q1: "Help me compare Forward Euler, Backward Euler, and Tustin discretization for a PID controller at different sample rates in Python",
+            q2: "How do discretization method and sample rate affect closed-loop stability, and what is the Tustin bilinear transform formula?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 5 — NONLINEAR CONTROL & MPC
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P5",
+        title: "Nonlinear Control & MPC",
+        duration: "10–12 weeks",
+        prereq: "Phases 1–4 complete",
+        hw: "None",
+        cost: "Free (laptop only)",
+        color: "#FF6B9D",
+        desc: "Real physics is nonlinear. Friction, joint limits, fluid dynamics, and magnetic saturation all break linear assumptions. This phase introduces the tools that work when linearization fails — and Model Predictive Control, the gold standard for systems with hard constraints.",
+        connection: "MPC is LQR extended over a horizon N and augmented with constraints. The Riccati equation you solved in Phase 3 is solved inside MPC at every timestep — once you see this connection, MPC is not a new concept but a generalization of what you already know.",
+        robNote: null,
+        topics: [
+          {
+            icon: "🌀",
+            title: "Nonlinear Control",
+            desc: "Sliding mode control, feedback linearization — tools for real physics",
+            items: ["Feedback linearization: cancel nonlinearities exactly", "Sliding mode control (SMC): robust switching control", "Chattering effect and boundary layer solution", "Lyapunov-based stability analysis for nonlinear systems", "Backstepping control for cascaded systems"],
+            tags: ["math", "code", "tools:casadi, scipy.integrate"]
+          },
+          {
+            icon: "🔮",
+            title: "Model Predictive Control (MPC)",
+            desc: "Optimize over a future horizon with hard constraints — the industry gold standard",
+            items: ["Receding horizon control principle", "Quadratic programming (QP) formulation", "State and input constraints (box constraints)", "Terminal cost and stability guarantees", "Linear MPC vs Nonlinear MPC (NMPC)", "Economic MPC for energy optimization"],
+            tags: ["math", "code", "tools:do-mpc, casadi, cvxpy"]
+          },
+          {
+            icon: "🏗️",
+            title: "Robust Control",
+            desc: "H-infinity, μ-synthesis — guarantee performance under model uncertainty",
+            items: ["Uncertainty modeling: structured and unstructured", "H∞ norm and its control interpretation", "Small gain theorem for robust stability", "Loop shaping design approach", "μ-synthesis for structured uncertainty"],
+            tags: ["math", "code", "tools:python-control hinfsyn(), slycot"]
+          }
+        ],
+        checks: [
+          "Can implement sliding mode control and see chattering",
+          "Can add a boundary layer to reduce chattering",
+          "Understand what receding horizon means in MPC",
+          "Can formulate an MPC as a QP and solve with scipy or cvxpy",
+          "Understand what H∞ norm means for robustness",
+          "Can test a controller under parameter uncertainty"
+        ],
+        resources: [
+          { type: "BOOK", name: "Nonlinear Systems — Hassan Khalil", note: "Graduate level but sections 1–4 are essential" },
+          { type: "BOOK", name: "Model Predictive Control — Rawlings, Mayne, Diehl", note: "The definitive MPC textbook, free PDF online" },
+          { type: "TOOL", name: "do-mpc (Python)", note: "pip install do-mpc — symbolic MPC with CasADi backend" },
+          { type: "TOOL", name: "CasADi", note: "Symbolic differentiation library for nonlinear optimization" }
+        ],
+        milestone: {
+          icon: "🚀",
+          title: "Phase 5 milestone",
+          desc: "You have swung a simulated pendulum from hanging to upright using sliding mode control, watched the chattering, and fixed it with a boundary layer. You have built an MPC from a QP optimizer — without a library — and watched it respect hard constraints that a PID violates."
+        },
+        projects: [
+          {
+            num: "13",
+            name: "Pendulum swing-up with sliding mode",
+            tagline: "Swing a pendulum from hang to upright using pure nonlinear SMC — then watch it chatter",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a pendulum hanging down. Design two controllers: (1) a sliding mode controller for the swing-up phase using a switching surface, and (2) an LQR (from Phase 3) for the balancing phase at the top. Implement automatic mode switching at 30° from vertical. Animate the full swing-up and balance sequence. Then deliberately remove the boundary layer and observe the chattering in the control signal. Add it back and compare both control signals on a subplot.",
+            why: "This is the canonical nonlinear control demonstration. The chattering is immediately visible in both the animation and the control signal — motivating the boundary layer solution that every practical SMC implementation uses.",
+            parts: ["Laptop only", "Python", "numpy", "scipy", "matplotlib"],
+            steps: [
+              "Simulate: θ'' = -(g/L)sin(θ) + u/(mL²); use solve_ivp",
+              "Swing-up: energy-based control u = k×E×sign(θ̇×cos(θ)) where E is energy error",
+              "Near top (|θ - π| < 0.5 rad): switch to LQR from linearized model",
+              "SMC version: define s = θ̇ + λ(θ - π); u_smc = -k×sign(s)",
+              "Boundary layer: replace sign(s) with s/(|s|+δ); compare chattering plots"
+            ],
+            q1: "Help me implement a sliding mode controller for pendulum swing-up with automatic LQR switch at the top in Python",
+            q2: "How do I add a boundary layer to a sliding mode controller to reduce chattering and what is the trade-off?"
+          },
+          {
+            num: "14",
+            name: "Constrained conveyor belt MPC",
+            tagline: "Build MPC from a QP optimizer — watch it respect hard speed limits that PID violates",
+            hw: false,
+            cost: "Free",
+            what: "Model a conveyor belt as a first-order system (belt speed with motor lag). Build MPC from scratch using scipy.optimize.minimize — no MPC library. Hard constraints: speed must stay in [0, 3] m/s, motor effort change per step ≤ 10%. Set a reference speed profile that ramps, steps, and drops. Simulate both MPC and a hand-tuned PID on the same profile. Plot: speed tracking comparison, constraint violation events for PID (marked in red), and the MPC cost at each step.",
+            why: "MPC's superpower is hard constraints. PID ignores them — it will drive a motor past its limit if the setpoint demands it. Building MPC from the QP level (not a library) reveals exactly what the receding horizon principle computes.",
+            parts: ["Laptop only", "Python", "numpy", "scipy.optimize", "matplotlib"],
+            steps: [
+              "Model: speed[k+1] = a×speed[k] + b×u[k] (identify a=0.9, b=0.15 from a step response)",
+              "Cost function: J = Σ(speed[k] - ref[k])² + r×u[k]² over horizon N=6",
+              "Constraints: 0 ≤ speed[k] ≤ 3 for all k; |u[k]| ≤ 0.1 for all k",
+              "Solve: scipy.optimize.minimize(J, u0, method='SLSQP', constraints=...)",
+              "Apply u[0] only; shift horizon; re-solve next step; track constraint violations for PID"
+            ],
+            q1: "Help me implement model predictive control from scratch using scipy.optimize.minimize for conveyor belt speed control with hard constraints",
+            q2: "What is the receding horizon principle and why is only the first control action applied in MPC at each timestep?"
+          },
+          {
+            num: "15",
+            name: "Robustness test bench",
+            tagline: "Design for the worst case — see which controller survives 30% model error",
+            hw: false,
+            cost: "Free",
+            what: "Design three controllers for the same nominal mass-spring-damper plant: a PID (Ziegler-Nichols), an LQR (from Phase 3), and an H∞ controller (python-control.hinfsyn). Then test all three on a 'wrong' plant where mass, damping, and stiffness each vary by ±30% from the nominal. Build a slider for 'model error %' that interpolates the plant parameters. Plot all three closed-loop step responses on the perturbed plant. Show which controller goes unstable first as error increases.",
+            why: "Controllers designed on a perfect model often fail on the real system. This project builds the habit of testing robustness — the most important practical engineering skill before any real hardware deployment.",
+            parts: ["Laptop only", "Python", "numpy", "scipy", "python-control", "matplotlib"],
+            steps: [
+              "Nominal plant: G(s) = 1/(ms² + cs + k) with m=1, c=0.5, k=2",
+              "Design PID via Ziegler-Nichols step-response method on nominal plant",
+              "Design LQR via ARE on state-space form of nominal plant",
+              "Design H∞ via control.hinfsyn() with uncertainty weighting function",
+              "Simulate all three on plants with m=m×(1+δ), δ ∈ [-0.3, 0.3]; add slider"
+            ],
+            q1: "Help me compare PID, LQR, and H-infinity robustness against plant parameter uncertainty using python-control in Python",
+            q2: "How do I use python-control.hinfsyn() to design an H-infinity controller for a mass-spring-damper with uncertainty?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 6 — MACHINE LEARNING FOR CONTROL
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P6",
+        title: "Machine Learning for Control",
+        duration: "10–12 weeks",
+        prereq: "Phases 1–5 + basic ML (neural networks)",
+        hw: "None",
+        cost: "Free (laptop only, GPU optional)",
+        color: "#3DD68C",
+        desc: "Machine learning enters control when the physics model is unknown, too complex to compute, or needs to adapt to changing conditions. Every project in this phase builds something that a classical controller cannot — and then honestly shows where the data-driven approach fails.",
+        connection: "The neural dynamics model you build in Project 16 is directly reused inside the MPC loop in Project 18. The GP uncertainty model in Project 17 is the data-driven equivalent of the Kalman filter covariance you built in Phase 4.",
+        robNote: "The motor dynamics learner (Project 16) is directly applicable to your robot hand retargeting project: learn the servo transfer function from commanded angle to actual joint angle, then use it for trajectory prediction in the retargeting pipeline.",
+        topics: [
+          {
+            icon: "🧠",
+            title: "Neural Network Controllers",
+            desc: "Learn dynamics and policies from data using deep learning",
+            items: ["Neural ODE: use a network as the right-hand side of an ODE", "LSTM for time-series dynamics learning", "Imitation learning / behavior cloning", "Koopman operator theory: lift nonlinear to linear", "Physics-informed neural networks (PINNs)", "Sim-to-real transfer for learned models"],
+            tags: ["code", "tools:PyTorch, JAX, gymnasium"]
+          },
+          {
+            icon: "🌐",
+            title: "Gaussian Process Control",
+            desc: "Quantify what the model does not know — essential for safe learning on hardware",
+            items: ["GP regression: mean prediction and uncertainty bands", "Kernel functions: RBF, Matérn, periodic", "PILCO algorithm: model-based RL with GP dynamics", "GP-MPC: uncertainty-aware model predictive control", "Safe exploration using confidence bounds"],
+            tags: ["math", "code", "tools:GPyTorch, GPflow"]
+          },
+          {
+            icon: "🔗",
+            title: "Hybrid: Neural MPC",
+            desc: "Learned models inside MPC — combine interpretability with data-driven flexibility",
+            items: ["Residual dynamics learning: f_real = f_nominal + f_residual_NN", "Auto-differentiation through neural models (torch.autograd)", "Online model adaptation with incremental training", "Ensemble models for uncertainty estimation in MPC", "Safe sets for neural MPC using prior knowledge"],
+            tags: ["code", "math", "tools:PyTorch + do-mpc, acados"]
+          }
+        ],
+        checks: [
+          "Can train a neural network to predict next state given current state and action",
+          "Understand the difference between model learning and policy learning",
+          "Can fit a GP and extract uncertainty bounds from it",
+          "Understand what PILCO does differently from model-free RL",
+          "Can use torch.autograd to differentiate through a neural model",
+          "Understand what residual dynamics learning means"
+        ],
+        resources: [
+          { type: "BOOK", name: "Deep Learning — Goodfellow, Bengio, Courville", note: "Chapters 1–9 for neural network foundations" },
+          { type: "PAPER", name: "PILCO — Deisenroth & Rasmussen (2011)", note: "The GP-based model-based RL paper, read it" },
+          { type: "TOOL", name: "GPyTorch", note: "pip install gpytorch — scalable GP library from Cornell" },
+          { type: "TOOL", name: "PyTorch + torch.autograd", note: "Required for neural MPC gradient computation" }
+        ],
+        milestone: {
+          icon: "🤖",
+          title: "Phase 6 milestone",
+          desc: "You have a neural network that predicts DC motor dynamics from data. You have a GP that quantifies its own uncertainty over temperature sensor readings. You have replaced the physics model inside an MPC with a neural network — and watched the MPC online-adapt as more data arrives."
+        },
+        projects: [
+          {
+            num: "16",
+            name: "Motor dynamics learner",
+            tagline: "Train a neural network to predict how a motor responds — then use it to plan",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a DC motor and collect 10,000 (state, action) → next_state data points at various operating conditions. Train a 3-layer MLP in PyTorch to predict the next state. Evaluate on held-out trajectories. Then use the learned model for one-step-ahead planning: at each timestep, choose the action that minimizes predicted tracking error. Compare: (1) pure PID, (2) model-based controller with true physics, (3) model-based controller with learned model. Plot all three tracking a reference speed profile.",
+            why: "Model learning is the entry point to data-driven control. Seeing the neural model match physics (and fail outside training distribution) builds the intuition for when to trust it — essential before using learned models on real hardware.",
+            parts: ["Laptop only", "Python", "PyTorch", "numpy", "matplotlib"],
+            steps: [
+              "Simulate DC motor with random input sequences; save (v, u, v_next) as dataset",
+              "Build MLP: nn.Sequential(nn.Linear(2,64), nn.ReLU(), nn.Linear(64,64), nn.ReLU(), nn.Linear(64,1))",
+              "Train: MSELoss on v_next, Adam optimizer, 100 epochs, 80/20 split",
+              "One-step planner: u* = argmin_u (model_predict(v, u) - v_ref)² using scipy.minimize",
+              "Compare PID vs physics MPC vs learned MPC on a step + ramp reference profile"
+            ],
+            q1: "Help me train a PyTorch neural network to learn DC motor dynamics from simulation data and use it for model-based one-step-ahead control",
+            q2: "How do I use a learned neural dynamics model for model-based planning without reinforcement learning?"
+          },
+          {
+            num: "17",
+            name: "GP temperature controller",
+            tagline: "Fit a Gaussian process to sensor readings — control with built-in uncertainty bands",
+            hw: false,
+            cost: "Free",
+            what: "Simulate a room heating system with unknown nonlinear heat loss (cubic curve). Collect 60 (heater power, equilibrium temperature) measurements — intentionally with a gap in the data (no measurements between 30% and 50% heater power). Fit a GP using GPyTorch with RBF kernel. Plot the posterior mean and ±2σ confidence intervals — the gap should show wide uncertainty. Design two controllers: a PID (ignores uncertainty) and a GP-aware controller that reduces output when σ is high and is aggressive when σ is low. Compare tracking of a reference temperature profile.",
+            why: "Gaussian processes don't just predict — they say 'I don't know here'. The gap in training data creates a visually obvious uncertainty spike. This motivates safe exploration: never drive into unknown territory at full speed.",
+            parts: ["Laptop only", "Python", "GPyTorch", "numpy", "matplotlib"],
+            steps: [
+              "Simulate nonlinear heating: T_eq = f(P) = 20 + 80×P - 30×P² + 10×P³ (normalized P ∈ [0,1])",
+              "Sample 30 points from P ∈ [0, 0.3] and 30 points from P ∈ [0.5, 1.0]; skip [0.3, 0.5]",
+              "Fit GPyTorch ExactGP with RBFKernel + GaussianLikelihood; train 100 iterations",
+              "Plot mean and ±2σ; uncertainty gap should be clearly visible in [0.3, 0.5]",
+              "GP controller: u = u_nominal × (1 - tanh(σ(x)/σ_threshold)) as safety reduction"
+            ],
+            q1: "Help me fit a Gaussian process to nonlinear heating data with GPyTorch and implement an uncertainty-aware temperature controller",
+            q2: "How do I design a controller that reduces its control effort when the GP model uncertainty is high?"
+          },
+          {
+            num: "18",
+            name: "Neural network inside MPC",
+            tagline: "Replace the physics model in MPC with a learned network — then let it adapt online",
+            hw: false,
+            cost: "Free",
+            what: "Take the MPC from Phase 5 (Project 14) and the neural motor model from Project 16 in this phase. Replace the physics model inside the MPC cost function with the neural network. Use torch.autograd to compute gradients of the cost through the network for optimization. Compare: physics-MPC vs neural-MPC on identical pendulum swing trajectories. Then add an online learning loop: every 50 steps, retrain the neural model on new data collected during the run. Plot how tracking error decreases as the model improves.",
+            why: "Neural MPC is the state of the art for systems with unknown or partially known dynamics. Building it from components — learned model + QP optimizer + online adaptation — shows exactly why the field combines these tools.",
+            parts: ["Laptop only", "Python", "PyTorch", "numpy", "scipy", "matplotlib"],
+            steps: [
+              "Import trained neural dynamics model from Project 16 (or retrain a simple one)",
+              "Wrap neural model prediction inside a differentiable cost function using torch tensors",
+              "Optimize: u* = argmin_u J(u) using gradient descent through the network (torch.autograd)",
+              "Compare physics-MPC vs neural-MPC on tracking a smooth reference trajectory",
+              "Online loop: every 50 steps, run model.fit(new_data_buffer, epochs=10) and re-deploy"
+            ],
+            q1: "Help me build a neural network model predictive controller using torch.autograd for gradient-based optimization through the learned model",
+            q2: "How do I implement online model adaptation inside an MPC loop using incremental neural network retraining?"
+          }
+        ]
+      },
+
+      /* ══════════════════════════════════════════════════════
+         PHASE 7 — INTELLIGENT & RL CONTROL
+      ══════════════════════════════════════════════════════ */
+      {
+        code: "P7",
+        title: "Intelligent & Reinforcement Learning Control",
+        duration: "12–16 weeks",
+        prereq: "All previous phases complete",
+        hw: "None",
+        cost: "Free (GPU recommended but not required)",
+        color: "#FF6B9D",
+        desc: "Reinforcement learning frames the control problem as an agent maximizing cumulative reward through interaction. This is the most powerful and most dangerous framework — an RL policy that worked in simulation can catastrophically fail on hardware. This phase teaches both the power and the safety engineering around it.",
+        connection: "The LQR cost function J = ∫(x'Qx + u'Ru)dt from Phase 3 is the infinite-horizon continuous version of the RL discounted return J = Σγ^t r(x_t, u_t). The value function V(x) in RL is the solution to the Bellman equation — the recursive form of the Riccati equation you already solved. RL is LQR without the linearity assumption and without knowing the model.",
+        robNote: "The CBF safety filter in Project 20 is directly applicable to your robot hand project: implement joint limit safety constraints on top of any RL or learned policy to prevent mechanical damage during training or deployment.",
+        topics: [
+          {
+            icon: "🎮",
+            title: "Reinforcement Learning Control",
+            desc: "Learn a control policy by interacting with the environment — PPO, SAC, TD3",
+            items: ["MDP formulation for control tasks (S, A, R, P, γ)", "Policy gradient: REINFORCE, PPO, TRPO", "Off-policy: SAC (entropy regularized), TD3, DDPG", "Reward shaping for control tasks", "Curriculum learning for complex tasks", "Sim-to-real transfer strategies"],
+            tags: ["code", "tools:stable-baselines3, gymnasium, MuJoCo"]
+          },
+          {
+            icon: "🛡️",
+            title: "Safe & Constrained RL",
+            desc: "Control barrier functions, Lagrangian RL — safety without sacrificing performance",
+            items: ["Control Barrier Functions (CBF) definition and conditions", "CBF as a QP safety filter on any policy", "Lagrangian relaxation for constraint satisfaction (CPO)", "Lyapunov-based actor-critic (LBAC)", "Safe exploration with uncertainty bounds", "Formal verification for learned policies"],
+            tags: ["math", "code", "tools:safe-control-gym, cvxpy, Safety Gymnasium"]
+          },
+          {
+            icon: "🤖",
+            title: "Intelligent Control Systems",
+            desc: "Fuzzy logic, adaptive control, multi-mode coordination, and foundation models",
+            items: ["Fuzzy logic controller design and rule tables", "Model Reference Adaptive Control (MRAC)", "Self-tuning regulator (online system identification + control)", "Multi-agent reinforcement learning basics", "Foundation model policies: RT-2, π0 (pi-zero)", "Meta-learning: learn to learn new tasks quickly"],
+            tags: ["code", "tools:scikit-fuzzy, huggingface lerobot, l2l"]
+          }
+        ],
+        checks: [
+          "Can build a custom Gymnasium environment from scratch",
+          "Can train a PPO or SAC agent using stable-baselines3",
+          "Understand what entropy regularization does in SAC",
+          "Can implement a CBF safety filter as a QP",
+          "Understand what MRAC does and when to use it",
+          "Can design a fuzzy logic controller with rule tables"
+        ],
+        resources: [
+          { type: "BOOK", name: "Reinforcement Learning — Sutton & Barto", note: "Free at incompleteideas.net — the foundational text" },
+          { type: "PAPER", name: "Safe RL using CBFs — Ames et al. (2019)", note: "The key paper on control barrier functions for RL" },
+          { type: "TOOL", name: "stable-baselines3 + gymnasium", note: "pip install stable-baselines3 gymnasium" },
+          { type: "TOOL", name: "cvxpy", note: "pip install cvxpy — needed for CBF QP solver" }
+        ],
+        milestone: {
+          icon: "🏆",
+          title: "Phase 7 milestone — Roadmap complete",
+          desc: "You have trained a PPO agent in a custom nonlinear environment you built from scratch. You have bolted a CBF safety filter onto an RL policy and made it physically incapable of violating joint limits. You have built a multi-mode controller that automatically selects the right algorithm for each operating region. You are a control systems engineer."
+        },
+        projects: [
+          {
+            num: "19",
+            name: "RL agent for a nonlinear water tank",
+            tagline: "Build your own physics environment, train PPO, compare against a hand-tuned PID",
+            hw: false,
+            cost: "Free",
+            what: "Create a custom Gymnasium environment: a water tank with Torricelli's nonlinear outflow (dh/dt = -c√h + pump_flow). The agent controls pump duty cycle. Goal: fill to a target level without overflowing, using minimum energy. Implement a careful reward function: penalize level error, penalize pump effort, add a large penalty for overflow. Train PPO for 200,000 steps. Plot the learning curve (episode reward vs steps). Compare trained agent vs hand-tuned PID on three reference levels: easy (50%), medium (75%), hard (90% — near overflow).",
+            why: "Building the environment yourself forces you to think about state space, action space, reward design, and terminal conditions — the four decisions that determine whether RL succeeds. Most beginners use pre-built CartPole and miss all of this.",
+            parts: ["Laptop only", "Python", "stable-baselines3", "gymnasium", "numpy", "matplotlib"],
+            steps: [
+              "class WaterTankEnv(gym.Env): obs=[h, h_target, pump], action=[duty_cycle ∈ 0,1]",
+              "step(): dh = (-c×√max(h,0) + pump×max_flow)×dt; reward = -|h-target| - 0.01×pump²",
+              "done = True if h > h_max (overflow) or h < 0 or t > T_max",
+              "Train: model = PPO('MlpPolicy', env, verbose=1); model.learn(total_timesteps=200000)",
+              "Plot: learning curve (EpRewardMean vs steps); compare agent vs PID on 3 target levels"
+            ],
+            q1: "Help me build a custom Gymnasium environment for a nonlinear water tank with Torricelli outflow and train a PPO agent using stable-baselines3",
+            q2: "How do I design a reward function for water level control RL that prevents overflow without making learning too sparse?"
+          },
+          {
+            num: "20",
+            name: "CBF safety filter for any RL policy",
+            tagline: "Bolt a safety layer onto any agent — make joint limit violations physically impossible",
+            hw: false,
+            cost: "Free",
+            what: "Create a 1D robot arm joint environment with position limits ±1.5 rad. Train a PPO agent without any safety — observe it occasionally hitting the limits (mark violations in red). Then implement a Control Barrier Function safety filter as a small QP: at each step, the filter takes the RL policy's proposed action and solves a QP that returns the closest safe action. The QP minimizes (u - u_RL)² subject to the CBF condition ḣ + γh ≥ 0. Compare: raw RL (violations), CBF-RL (no violations, similar performance). Plot joint angle trajectories for both.",
+            why: "CBF safety filters are mandatory before any RL policy touches real hardware. This is the most important project in Phase 7 for hardware engineers — it makes learned policies deployable on physical robots.",
+            parts: ["Laptop only", "Python", "stable-baselines3", "gymnasium", "cvxpy", "numpy"],
+            steps: [
+              "JointEnv: obs=[θ, θ̇], action=torque; limits: -1.5 ≤ θ ≤ 1.5 rad",
+              "Train PPO without safety; record violations (when |θ| > 1.5)",
+              "Barrier function: h(x) = (1.5² - θ²); need ḣ + γh ≥ 0",
+              "ḣ = -2θ×θ̇; CBF condition: -2θ×(θ̇ + u×dt) + γ×h ≥ 0 → linear in u",
+              "QP via cvxpy: minimize (u-u_rl)², subject to CBF linear constraint; apply u* instead of u_rl"
+            ],
+            q1: "Help me implement a control barrier function safety filter as a cvxpy QP for a joint-limit-constrained robot arm RL policy",
+            q2: "How do I formulate the CBF condition as a linear constraint in u and solve the minimum-intervention QP at each timestep?"
+          },
+          {
+            num: "21",
+            name: "Multi-mode adaptive controller",
+            tagline: "Three controllers, one arm — let a neural classifier choose who drives",
+            hw: false,
+            cost: "Free",
+            what: "Build a 1-DOF robot arm simulation. Design three controllers: (1) LQR for near-target precision (|error| < 0.1 rad), (2) PID for medium range, (3) trained SAC agent for large moves and disturbances. Collect simulation data labeled by which controller performs best in each operating region (measured by control effort × settling time product). Train a 2-layer classifier in PyTorch to predict the best controller from the current state [θ, θ̇, error]. Simulate the adaptive system: classifier picks controller at each timestep. Compare adaptive vs fixed-PID: the adaptive system should be 30%+ faster on large moves and more precise near the target.",
+            why: "Real industrial systems have always switched between control modes. Building the switching logic as a learned classifier (rather than hard-coded if-else rules) generalizes to multiple axes and dynamic conditions — the bridge between all phases of this roadmap.",
+            parts: ["Laptop only", "Python", "PyTorch", "stable-baselines3", "scipy", "numpy", "matplotlib"],
+            steps: [
+              "Simulate 1-DOF arm; implement LQR (Phase 3), PID (Phase 2), train SAC agent",
+              "Data collection: for each (θ, θ̇, error) bin, simulate all 3 controllers; label with argmin(cost)",
+              "Train PyTorch classifier: 3-input → 2 hidden layers (32 units each) → 3 outputs (softmax)",
+              "Adaptive system: at each step, state → classifier → pick controller → apply its action",
+              "Compare episode: adaptive vs fixed PID; plot controller switches as colored background segments"
+            ],
+            q1: "Help me build a multi-mode adaptive controller that uses a neural network classifier to switch between LQR, PID, and SAC based on current state",
+            q2: "How do I collect labeled training data for a controller-selection classifier from simulation, and what features should I use as inputs?"
+          }
+        ]
+      }
+    ];
+
+    /* ─── State ───────────────────────────────────────── */
+    let activePhase = 0;
+    const donePhases = new Set();
+    const checkedItems = {};
+
+    /* ─── Build functions ─────────────────────────────── */
+    function buildPhaseHTML(p, idx) {
+      const topicCards = p.topics.map(t => `
+    <div class="topic-card">
+      <div class="topic-icon">${t.icon}</div>
+      <div class="topic-title">${t.title}</div>
+      <div class="topic-desc">${t.desc}</div>
+      <ul class="topic-items">
+        ${t.items.map(i => `<li>${i}</li>`).join('')}
+      </ul>
+      <div class="topic-tags">
+        ${t.tags.map(tag => {
+        if (tag === 'math') return '<span class="tag tag-math">math</span>';
+        if (tag === 'code') return '<span class="tag tag-code">code</span>';
+        if (tag === 'hw') return '<span class="tag tag-hw">hardware</span>';
+        if (tag.startsWith('tools:')) return `<span class="tag tag-tools">${tag.slice(6)}</span>`;
+        return `<span class="tag">${tag}</span>`;
+      }).join('')}
+      </div>
+    </div>
+  `).join('');
+
+      const projectCards = p.projects.map(proj => `
+    <div class="project-card" id="proj-${idx}-${proj.num}">
+      <div class="project-header" onclick="toggleProject('proj-${idx}-${proj.num}')">
+        <div class="proj-num">${proj.num}</div>
+        <div class="proj-head-info">
+          <div class="proj-name">${proj.name}</div>
+          <div class="proj-tagline">${proj.tagline}</div>
+        </div>
+        <div class="proj-badges">
+          ${proj.hw
+          ? '<span class="proj-badge badge-hw">Hardware</span>'
+          : '<span class="proj-badge badge-sw">Software only</span>'}
+          <span class="proj-badge ${proj.cost === 'Free' ? 'badge-free' : 'badge-cost'}">${proj.cost}</span>
+        </div>
+        <span class="proj-chevron">▾</span>
+      </div>
+      <div class="project-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <div class="body-label">WHAT YOU BUILD</div>
+            <div class="body-text">${proj.what}</div>
+          </div>
+          <div class="body-section">
+            <div class="body-label">WHY THIS TEACHES THE CONCEPT</div>
+            <div class="body-text">${proj.why}</div>
+          </div>
+        </div>
+
+        <div style="margin-top:16px">
+          <div class="body-label">PARTS NEEDED</div>
+          <div class="parts-wrap" style="margin-top:6px">
+            ${proj.parts.map(part => `<span class="part-chip">${part}</span>`).join('')}
+          </div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div class="body-label">BUILD STEPS</div>
+          <ol class="steps-list" style="margin-top:8px">
+            ${proj.steps.map(s => `<li>${s}</li>`).join('')}
+          </ol>
+        </div>
+
+        <div class="proj-actions">
+          <button class="action-btn btn-primary" onclick="ask('${proj.q1.replace(/'/g, "\\'")}')">
+            ▶ Start this project
+          </button>
+          <button class="action-btn btn-secondary" onclick="ask('${proj.q2.replace(/'/g, "\\'")}')">
+            ↗ Deep-dive question
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+      const checklistKey = `phase-${idx}`;
+      if (!checkedItems[checklistKey]) {
+        checkedItems[checklistKey] = new Array(p.checks.length).fill(false);
+      }
+
+      const checklistHTML = p.checks.map((c, ci) => {
+        const checked = checkedItems[checklistKey][ci];
+        return `
+      <div class="check-item ${checked ? 'checked-item' : ''}" id="ci-${idx}-${ci}">
+        <div class="check-box ${checked ? 'checked' : ''}" onclick="toggleCheck(${idx}, ${ci}, this)">
+          ${checked ? '✓' : ''}
+        </div>
+        <span class="check-text">${c}</span>
+      </div>
+    `;
+      }).join('');
+
+      const resourcesHTML = p.resources.map(r => `
+    <div class="resource-card">
+      <div class="res-type">${r.type}</div>
+      <div class="res-name">${r.name}</div>
+      <div class="res-note">${r.note}</div>
+    </div>
+  `).join('');
+
+      const connectionNote = p.connection ? `
+    <div class="connection-note">
+      <strong>Key connection to other phases:</strong> ${p.connection}
+    </div>
+  ` : '';
+
+      const robNote = p.robNote ? `
+    <div class="robotics-note">
+      <strong>Connection to your robotics work:</strong> ${p.robNote}
+    </div>
+  ` : '';
+
+      return `
+    <div class="main-header">
+      <div class="phase-eyebrow">${p.code} — ${(idx + 1)} of ${phases.length}</div>
+      <div class="phase-heading">${p.title}</div>
+      <div class="phase-meta-row">
+        <span class="meta-pill pill-duration">⏱ ${p.duration}</span>
+        <span class="meta-pill pill-prereq">↳ ${p.prereq}</span>
+        ${p.hw !== "None" ? `<span class="meta-pill pill-hw">🔧 ${p.hw}</span>` : ''}
+        <span class="meta-pill pill-cost">💲${p.cost}</span>
+      </div>
+      <div class="phase-desc">${p.desc}</div>
+    </div>
+
+    <div class="content-area">
+
+      ${connectionNote}
+      ${robNote}
+
+      <div class="section-block">
+        <div class="section-label">WHAT TO LEARN</div>
+        <div class="topics-grid">${topicCards}</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">REAL-WORLD PROJECTS</div>
+        ${projectCards}
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">PHASE CHECKLIST — tick when you can do this without help</div>
+        <div class="checklist">${checklistHTML}</div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-label">LEARNING RESOURCES</div>
+        <div class="resources-grid">${resourcesHTML}</div>
+      </div>
+
+      <div class="milestone-bar">
+        <span class="ms-icon">${p.milestone.icon}</span>
+        <div>
+          <div class="ms-title">${p.milestone.title}</div>
+          <div class="ms-desc">${p.milestone.desc}</div>
+        </div>
+      </div>
+
+    </div>
+  `;
+    }
+
+    /* ─── Interaction ─────────────────────────────────── */
+    function switchPhase(idx) {
+      activePhase = idx;
+
+      document.querySelectorAll('.sb-phase-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+
+      document.querySelectorAll('.mobile-nav-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i === idx);
+      });
+
+      const main = document.getElementById('main-content');
+      main.innerHTML = buildPhaseHTML(phases[idx], idx);
+
+      updateProgress();
+      main.scrollTo(0, 0);
+      window.scrollTo(0, 0);
+    }
+
+    function toggleProject(id) {
+      const card = document.getElementById(id);
+      card.classList.toggle('open');
+    }
+
+    function saveProgress() {
+      localStorage.setItem('controlSystemsProgress', JSON.stringify(checkedItems));
+    }
+
+    function loadProgress() {
+      const saved = localStorage.getItem('controlSystemsProgress');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          phases.forEach((p, i) => {
+            const key = `phase-${i}`;
+            if (parsed[key] && parsed[key].length === p.checks.length) {
+              checkedItems[key] = parsed[key];
+            }
+          });
+          // Update donePhases
+          phases.forEach((p, i) => {
+            const key = `phase-${i}`;
+            if (checkedItems[key].every(v => v)) {
+              donePhases.add(i);
+            }
+          });
+        } catch (e) {
+          console.error('Error loading progress:', e);
+        }
+      }
+    }
+
+    function toggleCheck(phaseIdx, checkIdx, element) {
+      const key = `phase-${phaseIdx}`;
+      checkedItems[key][checkIdx] = !checkedItems[key][checkIdx];
+
+      saveProgress();
+
+      const allChecked = checkedItems[key].every(v => v);
+      const navBtn = document.getElementById(`nav-${phaseIdx}`);
+      if (allChecked) {
+        donePhases.add(phaseIdx);
+        if (navBtn) navBtn.classList.add('done');
+      } else {
+        donePhases.delete(phaseIdx);
+        if (navBtn) navBtn.classList.remove('done');
+      }
+
+      // Update DOM locally instead of rebuilding the entire phase HTML
+      if (element) {
+        const isChecked = checkedItems[key][checkIdx];
+        element.classList.toggle('checked', isChecked);
+        element.innerHTML = isChecked ? '✓' : '';
+        const checkItem = element.closest('.check-item');
+        if (checkItem) {
+          checkItem.classList.toggle('checked-item', isChecked);
+        }
+      }
+
+      updateProgress();
+    }
+
+    function updateProgress() {
+      let total = 0, checked = 0;
+      phases.forEach((p, idx) => {
+        const key = `phase-${idx}`;
+        if (checkedItems[key]) {
+          total += p.checks.length;
+          checked += checkedItems[key].filter(v => v).length;
+        } else {
+          total += p.checks.length;
+        }
+      });
+      const pct = total > 0 ? Math.round((checked / total) * 100) : 0;
+      document.getElementById('prog-bar').style.width = pct + '%';
+      document.getElementById('prog-pct').textContent = pct + '%';
+    }
+
+    function toggleTheme() {
+      const root = document.documentElement;
+      const currentTheme = root.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', newTheme);
+
+      const icon = newTheme === 'light' ? '☀️' : '🌙';
+      const btn = document.getElementById('theme-toggle-btn');
+      const btnMobile = document.getElementById('theme-toggle-mobile');
+      if (btn) btn.textContent = icon;
+      if (btnMobile) btnMobile.textContent = icon;
+
+      localStorage.setItem('controlSystemsTheme', newTheme);
+    }
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('controlSystemsTheme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const icon = savedTheme === 'light' ? '☀️' : '🌙';
+      const btn = document.getElementById('theme-toggle-btn');
+      const btnMobile = document.getElementById('theme-toggle-mobile');
+      if (btn) btn.textContent = icon;
+      if (btnMobile) btnMobile.textContent = icon;
+    }
+
+    function ask(q) {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'ask', text: q }, '*');
+      }
+    }
+
+    /* ─── Init ────────────────────────────────────────── */
+    initTheme();
+    phases.forEach((p, i) => { checkedItems[`phase-${i}`] = new Array(p.checks.length).fill(false); });
+    loadProgress();
+    switchPhase(0);
+    updateProgress();
+  </script>
+</body>
+
+</html>
