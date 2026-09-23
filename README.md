@@ -6,7 +6,7 @@ This roadmap consists of **7 phases** and **21 hands-on projects**. It is struct
 
 ## How to Read & Use This Roadmap
 
-This roadmap is provided as a self-contained, interactive web page https://nuwanchandima.github.io/control-systems-roadmap/. To get the most out of it:
+This roadmap is provided as a self-contained, interactive web page. To get the most out of it:
 
 1. **Open https://nuwanchandima.github.io/control-systems-roadmap/ in any web browser.**
 2. **Navigate through the Phases:** Use the sidebar (or mobile navigation menu) to jump between the 7 distinct phases of the roadmap.
@@ -69,6 +69,6 @@ The cutting-edge of control logic. Train policies to learn optimal control behav
 
 ## Getting Started
 
-To get started, simply open `index.html` in your favorite web browser, read through **Phase 1**, and begin the first project!
+To get started, read through **Phase 1**, and begin the first project!
 
 Ensure you have a standard Python environment set up with `numpy`, `scipy`, and `matplotlib` to tackle the early software simulation projects. For hardware projects, an Arduino and basic electronic components (servos, IMUs, DC motors) are recommended.
